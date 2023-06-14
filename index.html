@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CirosBlack - Changeman</title>
+	<link rel="shortcut icon" href="https://raw.githubusercontent.com/CirosBlack/Changeman/main/Favicon.ico" type="image/x-icon">
+	<style>
+    body {
+      font-family: "Arial Black", Arial, sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: #1C1C1C;
+    }
+    
+    #tabela-principal {
+      background-color: black;
+    }
+  </style>
+  <style>
+    .coluna-1 {
+      width: 70%;
+    }
+    .coluna-2 {
+      width: 30%;
+    }
+    .largura-responsiva {
+      width: 100%;
+      height: auto;
+    }
+    
+    .playlist {
+      width: 95%;
+      height: 100%;
+      overflow: auto;
+      background-color: black;
+      color: #fff;
+      padding: 10px;
+    }
+    .playlist ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 0;
+    }
+    .playlist a {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      background-color: #1C1C1C;
+      padding: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 10px;
+      border: 1px solid #fff;
+      color: #ccc;
+    }
+    .playlist a:hover {
+      background-color: #666;
+    }
+    .playlist a.selected {
+      background-color: #800000;
+      color: #fff;
+      border-color: #fff;
+    }
+    .playlist video {
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+      border-radius: 10px;
+      border: 1px solid #fff;
+    }
+    .playlist .thumbnail {
+      width: 100px;
+      height: 70px;
+      margin-right: 10px;
+      border-radius: 5%;
+      object-fit: cover;
+    }
+       #video-player::-webkit-media-controls {
+  display: none !important;
+}    
+  </style>
+      <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+<script>
+  function toggleColumn() {
+    var button = document.querySelector(".toggle-button");
+    var coluna2 = document.querySelector('.coluna-2');
+    
+    if (coluna2.style.display === 'none') {
+      coluna2.style.display = 'table-cell';
+      button.innerHTML = "Ocultar Playlist";
+    } else {
+      coluna2.style.display = 'none';
+      button.innerHTML = "Mostrar Playlist";
+    }
+  }
+</script>
+
+<style>
+    .toggle-button {
+      float: right;
+    }
+  </style>
+
+
+</head>
+<body>
+  <table id="tabela-principal" style="width: 100%;">
+    <tr>
+      <td class="coluna-1" style="border: 1px solid black;">
+        <table id="tabela-secundaria" class="largura-responsiva" style="border: 1px solid black;">
+          <tr>
+            <td id="primeira-celula" style="border: 1px solid black;"></td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid black;">
+              <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
+                <video id="video-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"  controls autoplay>
+                  <source src="" type="video/mp4">
+                </video>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td id="terceira-celula" style="border: 1px solid black;">
+  <div>
+    <input type="range" id="progress-bar" min="0" max="100" step="0.1" value="0" style="width: 100%;">
+    <div id="time" style="color: #fff; float: right; font-size: 12px;"></div>
+  </div>
+</td>
+
+          </tr>
+          <tr>
+            <td id="quarta-celula">
+  <button id="play-button">Play</button>
+<button id="previousBtn">Anterior</button>
+    <button id="nextBtn">Próximo</button>
+  <button id="tela-cheia-button">Tela Cheia</button>
+  <input type="range" id="volume-range"min="0" max="1" step="0.1" value="1">
+    <button class="toggle-button" onclick="toggleColumn()">Ocultar Playlist</button>
+    
+</td>
+        </table>
+      </td>
+      <td class="coluna-2" style="border: 1px solid black;">
+        <div class="playlist" id="playlist">
+        <ul>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/01_Os_Defensores_Do_Planeta_Terra.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/01_Os_Defensores_Do_Planeta_Terra.jpg">Os Defensores do Planeta Terra</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/02_A_Ira_Do_Poderoso_Bazoo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/02_A_Ira_Do_Poderoso_Bazoo.jpg">A Ira do Poderoso Bazoo</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/03_O_Desespero_De_Zoobie.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/03_O_Desespero_De_Zoobie.jpg">O Desespero de Zoobie</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/04_O_Desaparecimento_De_Togo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/04_O_Desaparecimento_De_Togo.jpg">O Desaparecimento de Togo</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/05_O_Misterio_Do_Cristal_X.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/05_O_Misterio_Do_Cristal_X.jpg">O Mistério do Cristal X</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/06_Cuidado_Meninas_De_Virgem.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/06_Cuidado_Meninas_De_Virgem.jpg">Cuidado, Meninas de Virgem</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/07_O_Enviado_Do_Planeta_Atlanta.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/07_O_Enviado_Do_Planeta_Atlanta.jpg">O Enviado do Planeta Atlanta</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/08_As_Mulheres_Vampiras.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/08_As_Mulheres_Vampiras.jpg">As Mulheres Vampiras</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/09_A_Bola_Dragao_Salva_A_Humanidade.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/09_A_Bola_Dragao_Salva_A_Humanidade.jpg">A Bola Dragão Salva a Humanidade</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/10_O_Toque_Dos_Bonecos.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/10_O_Toque_Dos_Bonecos.jpg">O Toque dos Bonecos</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/11_A_Visita_De_Koko_E_Kiki.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/11_A_Visita_De_Koko_E_Kiki.jpg">A Visita de Koko e Kiki</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/12_Mermaid_Se_Torna_Mae.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/12_Mermaid_Se_Torna_Mae.jpg">Mermaid se Torna Mãe</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/13_A_Garota_Do_Planeta_Technoliquel.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/13_A_Garota_Do_Planeta_Technoliquel.jpg">A Garota do Planeta Technolíquel</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/14_Perdida_Na_Terra.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/14_Perdida_Na_Terra.jpg">Perdida na Terra</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/15_A_Motoqueira_Mai.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/15_A_Motoqueira_Mai.jpg">A Motoqueira Mai</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/16_O_Anjo_Do_Planeta_Meril.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/16_O_Anjo_Do_Planeta_Meril.jpg">O Anjo do Planeta Meril</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/17_O_Navio_Fantasma.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/17_O_Navio_Fantasma.jpg">O Navio Fantasma</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/18_O_Poder_De_Ahames.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/18_O_Poder_De_Ahames.jpg">O Poder de Ahames</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/19_A_Furia_De_Sayaka.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/19_A_Furia_De_Sayaka.jpg">A Fúria de Sayaka</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/20_A_Revanche_De_Giluke.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/20_A_Revanche_De_Giluke.jpg">A Revanche de Giluke</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/21_O_Metaleiro_Espacial.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/21_O_Metaleiro_Espacial.jpg">O Metaleiro Espacial</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/22_A_Prisioneira_Do_Espelho.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/22_A_Prisioneira_Do_Espelho.jpg">A Prisioneira do Espelho</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/23_O_Menino_E_O_Golfinho.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/23_O_Menino_E_O_Golfinho.jpg">O Menino e o Golfinho</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/24_A_Fuga_De_Gyodai.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/24_A_Fuga_De_Gyodai.jpg">A Fuga de Gyodai</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/25_Cancao_Fatal.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/25_Cancao_Fatal.jpg">Canção Fatal</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/26_Toque_Da_Primavera.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/26_Toque_Da_Primavera.jpg">Toque da Primavera</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/27_O_Sonho_Da_Familia_Gata.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/27_O_Sonho_Da_Familia_Gata.jpg">O Sonho da Família Gata</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/28_A_Maldicao_Sangrenta.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/28_A_Maldicao_Sangrenta.jpg">A Maldição Sangrenta</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/29_A_Lenda_Da_Borboleta_Dourada.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/29_A_Lenda_Da_Borboleta_Dourada.jpg">A Lenda da Borboleta Dourada</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/30_Avante_Pegasus.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/30_Avante_Pegasus.jpg">Avante, Pégasus!</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/31_O_Segredo_De_Bazoo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/31_O_Segredo_De_Bazoo.jpg">O Segredo de Bazoo</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/32_Reencontro_Perigoso.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/32_Reencontro_Perigoso.jpg">Reencontro Perigoso</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/33_O_Fim_De_Giluke.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/33_O_Fim_De_Giluke.jpg">O Fim de Giluke</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/34_Invencivel_Ahames.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/34_Invencivel_Ahames.jpg">Invencível Ahames</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/35_S.O.S._Planeta_Terra.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/35_S.O.S._Planeta_Terra.jpg">S.O.S. Planeta Terra!</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/36_A_Super_Potencia.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/36_A_Super_Potencia.jpg">A Super Potência</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/37_O_Desaparecimento_De_Dragon.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/37_O_Desaparecimento_De_Dragon.jpg">O Desaparecimento de Dragon</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/38_O_Espectro_Do_Baseball.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/38_O_Espectro_Do_Baseball.jpg">O Espectro do Baseball</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/39_O_Jogo_Do_Medo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/39_O_Jogo_Do_Medo.jpg">O Jogo do Medo</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/40_O_Estranho_Doce.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/40_O_Estranho_Doce.jpg">O Estranho Doce</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/41_O_Principe_Das_Estrelas.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/41_O_Principe_Das_Estrelas.jpg">O Príncipe das Estrelas</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/42_A_Garota_De_Uniforme_Escolar.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/42_A_Garota_De_Uniforme_Escolar.jpg">A Garota de Uniforme Escolar</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/43_O_Super_Giluke.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/43_O_Super_Giluke.jpg">O Super Giluke</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/44_Mai_Em_Acao.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/44_Mai_Em_Acao.jpg">Mai em Ação</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/45_Aira_A_Menina_Do_Arco-iris.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/45_Aira_A_Menina_Do_Arco-iris.jpg">Aira, a Menina do Arco-Íris</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/46_A_Transformacao_De_Shima.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/46_A_Transformacao_De_Shima.jpg">A Transformação de Shima</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/47_O_Sofrimento_Da_Familia_Gata.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/47_O_Sofrimento_Da_Familia_Gata.jpg">O Sofrimento da Família Gata</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/48_A_Paixao_De_Buba.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/48_A_Paixao_De_Buba.jpg">A Paixão de Buba</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/49_A_Aflicao_De_Shima.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/49_A_Aflicao_De_Shima.jpg">A Aflição de Shima</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/50_O_Abalo_De_Gozma.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/50_O_Abalo_De_Gozma.jpg">O Abalo de Gozma</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/51_A_Mensagem_De_Nana.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/51_A_Mensagem_De_Nana.jpg">A Mensagem de Nana</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/52_A_Morte_De_Buba.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/52_A_Morte_De_Buba.jpg">A Morte de Buba</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/53_A_Vinganca_De_Ahames.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/53_A_Vinganca_De_Ahames.jpg">A Vingança de Ahames</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/54_A_Ultima_Batalha.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/54_A_Ultima_Batalha.jpg">A Última Batalha</a></li>
+<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/55_Adeus_Herois_Do_Universo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/Changeman/main/55_Adeus_Herois_Do_Universo.jpg">Adeus, Heróis do Universo!</a></li>
+</ul>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var playlist = document.getElementById('playlist');
+    var previousBtn = document.getElementById('previousBtn');
+    var nextBtn = document.getElementById('nextBtn');
+
+    var currentIndex = 0;
+    var videos = playlist.getElementsByTagName('a');
+
+    function playVideo(index) {
+      if (index >= 0 && index < videos.length) {
+        var videoPlayer = document.getElementById('video-player');
+        var source = videos[index].getAttribute('href');
+        videoPlayer.src = source;
+        videoPlayer.load();
+        videoPlayer.play();
+
+        const tabelaSecundariaCelula1 = document.querySelector('#primeira-celula');
+        tabelaSecundariaCelula1.textContent = `Você está assistindo: ${videos[index].textContent.trim()}`;
+
+        // Remove a classe 'selected' de todos os vídeos da playlist
+        for (var i = 0; i < videos.length; i++) {
+          videos[i].classList.remove('selected');
+        }
+
+        // Adiciona a classe 'selected' ao vídeo atual na playlist
+        videos[index].classList.add('selected');
+
+        currentIndex = index; // Atualiza o índice atual para corresponder ao vídeo reproduzido
+      }
+    }
+
+    previousBtn.addEventListener('click', function() {
+      currentIndex--;
+      if (currentIndex < 0) {
+        currentIndex = videos.length - 1; // Volta para o último vídeo da playlist se estiver no primeiro vídeo
+      }
+      playVideo(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', function() {
+      currentIndex++;
+      if (currentIndex >= videos.length) {
+        currentIndex = 0; // Volta para o primeiro vídeo da playlist se estiver no último vídeo
+      }
+      playVideo(currentIndex);
+    });
+
+    var playlistItems = playlist.querySelectorAll('a');
+    playlistItems.forEach((playlistItem, index) => {
+      playlistItem.addEventListener('click', () => {
+        playVideo(index);
+        currentIndex = index;
+
+        // Remove a classe 'selected' de todos os vídeos da playlist
+        for (var i = 0; i < videos.length; i++) {
+          videos[i].classList.remove('selected');
+        }
+
+        // Adiciona a classe 'selected' ao vídeo atual na playlist
+        videos[index].classList.add('selected');
+      });
+    });
+
+    var videoPlayer = document.getElementById('video-player');
+
+    videoPlayer.addEventListener('ended', function() {
+      currentIndex++;
+      if (currentIndex >= videos.length) {
+        currentIndex = 0; // Volta para o primeiro vídeo da playlist se estiver no último vídeo
+      }
+      playVideo(currentIndex);
+    });
+  });
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const playButton = document.getElementById("play-button");
+    const telaCheiaButton = document.getElementById("tela-cheia-button");
+    const volumeRange = document.getElementById("volume-range");
+    const videoPlayer = document.getElementById("video-player");
+
+    playButton.addEventListener("click", function() {
+      if (videoPlayer.paused) {
+        videoPlayer.play();
+        playButton.textContent = "Pausar";
+      } else {
+        videoPlayer.pause();
+        playButton.textContent = "Play";
+      }
+    });
+
+    telaCheiaButton.addEventListener("click", function() {
+      if (videoPlayer.requestFullscreen) {
+        videoPlayer.requestFullscreen();
+      } else if (videoPlayer.mozRequestFullScreen) { // Firefox
+        videoPlayer.mozRequestFullScreen();
+      } else if (videoPlayer.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        videoPlayer.webkitRequestFullscreen();
+      } else if (videoPlayer.msRequestFullscreen) { // IE/Edge
+        videoPlayer.msRequestFullscreen();
+      }
+    });
+
+    volumeRange.addEventListener("input", function() {
+      videoPlayer.volume = volumeRange.value;
+    });
+  });
+
+  function initializePlaylist() {
+    const playlistItems = document.querySelectorAll('.playlist a');
+    const videoPlayer = document.getElementById('video-player');
+    let currentIndex = 0;
+
+    function playVideo(index) {
+      const source = playlistItems[index].getAttribute('href');
+      videoPlayer.src = source;
+      playlistItems.forEach(playlistItem => {
+        playlistItem.classList.remove('selected');
+      });
+      playlistItems[index].classList.add('selected');
+      const tabelaSecundariaCelula1 = document.querySelector('#primeira-celula');
+      tabelaSecundariaCelula1.textContent = `Você está assistindo: ${playlistItems[index].textContent.trim()}`;
+    }
+
+    playlistItems.forEach((playlistItem, index) => {
+      playlistItem.addEventListener('click', () => {
+        playVideo(index);
+      });
+    });
+
+    playVideo(currentIndex);
+  }
+
+  initializePlaylist();
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var playlist = document.getElementById('playlist');
+    var videoPlayer = document.getElementById('video-player');
+    var videoLinks = playlist.getElementsByTagName('a');
+
+    for (var i = 0; i < videoLinks.length; i++) {
+      videoLinks[i].addEventListener('click', function (event) {
+        event.preventDefault();
+        var videoSrc = this.getAttribute('href');
+        videoPlayer.src = videoSrc;
+
+        for (var j = 0; j < videoLinks.length; j++) {
+          videoLinks[j].classList.remove('selected');
+        }
+        this.classList.add('selected');
+      });
+    }
+
+    videoLinks[0].click();
+
+    function atualizarTamanhoPlaylist() {
+      var playlist = document.getElementById('playlist');
+      var tabelaSecundaria = document.getElementById('tabela-secundaria');
+      playlist.style.height = tabelaSecundaria.offsetHeight + 'px';
+    }
+
+    function atualizarPagina() {
+      atualizarTamanhoPlaylist();
+      // Outras atualizações necessárias quando a página é redimensionada
+    }
+
+    atualizarPagina();
+    window.addEventListener('resize', atualizarPagina);
+  });
+
+  var video = document.getElementById("video-player");
+  var progressBar = document.getElementById("progress-bar");
+
+  video.addEventListener("timeupdate", function() {
+    var progress = (video.currentTime / video.duration) * 100;
+    progressBar.value = progress;
+  });
+
+  var progressBar = document.getElementById('progress-bar');
+  var progressContainer = document.getElementById('progress-container');
+
+  progressBar.addEventListener('input', function() {
+    var videoPlayer = document.getElementById('video-player');
+    var time = videoPlayer.duration * (progressBar.value / 100);
+    videoPlayer.currentTime = time;
+  });
+
+  progressContainer.addEventListener('mousedown', function(e) {
+    var position = (e.pageX - this.offsetLeft) / this.offsetWidth;
+    progressBar.value = position * 100;
+    var videoPlayer = document.getElementById('video-player');
+    var time = videoPlayer.duration * (progressBar.value / 100);
+    videoPlayer.currentTime = time;
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    var playlistItems = document.querySelectorAll(".playlist a");
+    var videoPlayer = document.getElementById("video-player");
+
+    playlistItems.forEach(function(item) {
+      item.addEventListener("click", function(e) {
+        e.preventDefault();
+        var videoUrl = this.getAttribute("href");
+        var videoThumbnail = this.querySelector(".thumbnail").getAttribute("src");
+        videoPlayer.src = videoUrl;
+        videoPlayer.poster = videoThumbnail;
+        playlistItems.forEach(function(item) {
+          item.classList.remove("selected");
+        });
+        this.classList.add("selected");
+      });
+    });
+  });
+</script>
+
+<script>
+  // Função para atualizar o tempo do vídeo em forma decrescente
+  function updateTime() {
+    var videoPlayer = document.getElementById("video-player");
+    var timeElement = document.getElementById("time");
+
+    var duration = videoPlayer.duration;
+    var currentTime = videoPlayer.currentTime;
+    var remainingTime = duration - currentTime;
+
+    // Formatação do tempo em minutos e segundos
+    var minutes = Math.floor(remainingTime / 60);
+    var seconds = Math.floor(remainingTime % 60);
+
+    // Adiciona um zero à esquerda se os segundos forem menores que 10
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    // Atualiza o elemento de exibição do tempo
+    timeElement.innerHTML = minutes + ":" + seconds;
+
+    // Chama a função novamente após 1 segundo
+    setTimeout(updateTime, 1000);
+  }
+
+  // Chama a função updateTime quando o vídeo é carregado
+  var videoPlayer = document.getElementById("video-player");
+  videoPlayer.addEventListener("loadedmetadata", updateTime);
+</script>
+
+</body>
+</html>
