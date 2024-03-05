@@ -1,646 +1,1 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>CirosBlack - Changeman</title>
-	<link rel="shortcut icon" href="https://raw.githubusercontent.com/CirosBlack/jaspion/main/favicon.ico" type="image/x-icon">
-	<style>
-    body {
-      font-family: "Arial Black", Arial, sans-serif;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #fff;
-      background-color: #1C1C1C;
-    }
-    
-    #tabela-principal {
-      background-color: black;
-    }
-  </style>
-  <style>
-    .coluna-1 {
-      width: 70%;
-    }
-    .coluna-2 {
-      width: 30%;
-    }
-    .largura-responsiva {
-      width: 100%;
-      height: auto;
-    }
-    
-    .playlist {
-      width: 95%;
-      height: 100%;
-      overflow: auto;
-      background-color: black;
-      color: #fff;
-      padding: 10px;
-    }
-    .playlist ul {
-      list-style-type: none;
-      padding-left: 0;
-      margin-top: 0;
-    }
-    .playlist a {
-      display: flex;
-      align-items: center;
-      margin-bottom: 5px;
-      background-color: #1C1C1C;
-      padding: 5px;
-      cursor: pointer;
-      text-decoration: none;
-      border-radius: 10px;
-      border: 1px solid #fff;
-      color: #ccc;
-    }
-    .playlist a:hover {
-      background-color: #666;
-    }
-    .playlist a.selected {
-      background-color: #800000;
-      color: #fff;
-      border-color: #fff;
-    }
-    .playlist video {
-      width: 100%;
-      height: 0;
-      padding-bottom: 75%;
-      border-radius: 10px;
-      border: 1px solid #fff;
-    }
-    .playlist .thumbnail {
-      width: 100px;
-      height: 70px;
-      margin-right: 10px;
-      border-radius: 5%;
-      object-fit: cover;
-    }
-       #video-player::-webkit-media-controls {
-  display: none !important;
-}    
-  </style>
-      <script>
-        document.addEventListener('contextmenu', event => event.preventDefault());
-    </script>
-<script>
-  function toggleColumn() {
-    var button = document.querySelector(".toggle-button");
-    var coluna2 = document.querySelector('.coluna-2');
-    
-    if (coluna2.style.display === 'none') {
-      coluna2.style.display = 'table-cell';
-      button.innerHTML = '<img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Ocultar_Playlist.png" alt="Ícone Pausar" style="width: 50px; height: 50px;">';
-    } else {
-      coluna2.style.display = 'none';
-      button.innerHTML = '<img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Mostar_Playlist.png" alt="Ícone Pausar" style="width: 50px; height: 50px;">';
-    }
-  }
-</script>
-
-<style>
-    .toggle-button {
-    	float: right;
-      background-color: black; /* Define a cor de fundo como preto */
-            border: none; /* Remove a borda */
-            margin: 0; /* Remove a margem */
-            padding: 0; /* Remove o preenchimento interno */
-    }
-  </style>
-
-<style>
-        /* Estilo para o botão */
-        #play-button {
-            background-color: black; /* Define a cor de fundo como preto */
-            border: none; /* Remove a borda */
-            margin: 0; /* Remove a margem */
-            padding: 0; /* Remove o preenchimento interno */
-        }
-    </style>
-    
-    <style>
-        /* Estilo para o botão */
-        #previousBtn {
-            background-color: black; /* Define a cor de fundo como preto */
-            border: none; /* Remove a borda */
-            margin: 0; /* Remove a margem */
-            padding: 0; /* Remove o preenchimento interno */
-        }
-    </style>
-    
-        <style>
-        /* Estilo para o botão */
-        #nextBtn {
-            background-color: black; /* Define a cor de fundo como preto */
-            border: none; /* Remove a borda */
-            margin: 0; /* Remove a margem */
-            padding: 0; /* Remove o preenchimento interno */
-        }
-    </style>
-    
-    <style>
-        /* Estilo para o botão */
-        #tela-cheia-button {
-            background-color: black; /* Define a cor de fundo como preto */
-            border: none; /* Remove a borda */
-            margin: 0; /* Remove a margem */
-            padding: 0; /* Remove o preenchimento interno */
-        }
-    </style>
-
-    <style>
-        /* Estilo para o botão */
-        #retrocede10s {
-            background-color: black; /* Define a cor de fundo como preto */
-            border: none; /* Remove a borda */
-            margin: 0; /* Remove a margem */
-            padding: 0; /* Remove o preenchimento interno */
-        }
-    </style>
-    
-        <style>
-        /* Estilo para o botão */
-        #avanca10s {
-            background-color: black; /* Define a cor de fundo como preto */
-            border: none; /* Remove a borda */
-            margin: 0; /* Remove a margem */
-            padding: 0; /* Remove o preenchimento interno */
-        }
-    </style>
-    
-     <style>
-        /* Estilo para o botão */
-        #mostrar-controle {
-            background-color: black; /* Define a cor de fundo como preto */
-            border: none; /* Remove a borda */
-            margin: 0; /* Remove a margem */
-            padding: 0; /* Remove o preenchimento interno */
-        }
-    </style>
-    
-    <style>
-        #volume-range {
-            opacity: 0; /* Inicia com opacidade 0 para o fade */
-            transition: opacity 0.5s; /* Adiciona uma transição suave de 0.5 segundos */
-        }
-    </style>
-    
-    <style>
-  /* Estilize a tabela para ocupar 100% da largura da página */
-  table {
-    width: 100%;
-  }
-  /* Estilize as células da tabela para não ter espaçamento e alinhar as imagens ao centro */
-  td {
-    padding: 0;
-    text-align: 
-  }
-  /* Estilize as imagens para ocupar 100% da largura da célula */
-  img {
-    width: 100%;
-    height: auto;
-  }
-</style>
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        /* Estilo para tornar o iframe responsivo */
-        .embed-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-        }
-
-        .embed-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-    
-</head>
-<body>
-  <table id="tabela-principal" style="width: 100%;">
-    <tr>
-      <td class="coluna-1" style="border: 1px solid black;">
-        <table id="tabela-secundaria" class="largura-responsiva" style="border: 1px solid black;">
-          <tr>
-            <td id="primeira-celula" style="border: 1px solid black;"></td>
-          </tr>
-          <tr>
-            <td style="border: 1px solid black;">
-              <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
-                <video id="video-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" preload="auto" controls autoplay>
-                  <source src="" type="video/mp4">
-                </video>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td id="terceira-celula" style="border: 1px solid black;">
-  <div>
-    <input type="range" id="progress-bar" min="0" max="100" step="0.1" value="0" style="width: 100%;">
-    <div id="time" style="color: #fff; float: right; font-size: 12px;"></div>
-  </div>
-</td>
-          </tr>
-          <tr>
-            <td id="quarta-celula">
- <button id="play-button"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Play.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>
-<button id="retrocede10s"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Voltar_10_segundos.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>
-<button id="previousBtn"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Voltar.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>
-<button id="nextBtn"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Avancar.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>
-<button id="avanca10s"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Avancar_10_segundos.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>
-<button id="tela-cheia-button"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Tela.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>
-<button class="toggle-button" onclick="toggleColumn()"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Ocultar_Playlist.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>  
- <button id="mostrar-controle"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Volume.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>
-    <input type="range" id="volume-range" min="0" max="1" step="0.1" value="1">
-</td>
-</tr>
-        </table>
-      <td class="coluna-2" style="border: 1px solid black;">
-        <div class="playlist" id="playlist">
-<ul>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/01_Os_Defensores_Do_Planeta_Terra.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/01_Os_Defensores_Do_Planeta_Terra.jpg">Os Defensores do Planeta Terra</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/02_A_Ira_Do_Poderoso_Bazoo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/02_A_Ira_Do_Poderoso_Bazoo.jpg">A Ira do Poderoso Bazoo</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/03_O_Desespero_De_Zoobie.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/03_O_Desespero_De_Zoobie.jpg">O Desespero de Zoobie</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/04_O_Desaparecimento_De_Togo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/04_O_Desaparecimento_De_Togo.jpg">O Desaparecimento de Togo</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/05_O_Misterio_Do_Cristal_X.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/05_O_Misterio_Do_Cristal_X.jpg">O Mistério do Cristal X</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/06_Cuidado_Meninas_De_Virgem.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/06_Cuidado_Meninas_De_Virgem.jpg">Cuidado, Meninas de Virgem</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/07_O_Enviado_Do_Planeta_Atlanta.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/07_O_Enviado_Do_Planeta_Atlanta.jpg">O Enviado do Planeta Atlanta</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/08_As_Mulheres_Vampiras.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/08_As_Mulheres_Vampiras.jpg">As Mulheres Vampiras</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/09_A_Bola_Dragao_Salva_A_Humanidade.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/09_A_Bola_Dragao_Salva_A_Humanidade.jpg">A Bola Dragão Salva a Humanidade</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/10_O_Toque_Dos_Bonecos.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/10_O_Toque_Dos_Bonecos.jpg">O Toque dos Bonecos</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/11_A_Visita_De_Koko_E_Kiki.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/11_A_Visita_De_Koko_E_Kiki.jpg">A Visita de Koko e Kiki</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/12_Mermaid_Se_Torna_Mae.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/12_Mermaid_Se_Torna_Mae.jpg">Mermaid se Torna Mãe</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/13_A_Garota_Do_Planeta_Technoliquel.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/13_A_Garota_Do_Planeta_Technoliquel.jpg">A Garota do Planeta Technolíquel</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/14_Perdida_Na_Terra.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/14_Perdida_Na_Terra.jpg">Perdida na Terra</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/15_A_Motoqueira_Mai.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/15_A_Motoqueira_Mai.jpg">A Motoqueira Mai</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/16_O_Anjo_Do_Planeta_Meril.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/16_O_Anjo_Do_Planeta_Meril.jpg">O Anjo do Planeta Meril</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/17_O_Navio_Fantasma.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/17_O_Navio_Fantasma.jpg">O Navio Fantasma</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/18_O_Poder_De_Ahames.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/18_O_Poder_De_Ahames.jpg">O Poder de Ahames</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/19_A_Furia_De_Sayaka.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/19_A_Furia_De_Sayaka.jpg">A Fúria de Sayaka</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/20_A_Revanche_De_Giluke.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/20_A_Revanche_De_Giluke.jpg">A Revanche de Giluke</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/21_O_Metaleiro_Espacial.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/21_O_Metaleiro_Espacial.jpg">O Metaleiro Espacial</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/22_A_Prisioneira_Do_Espelho.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/22_A_Prisioneira_Do_Espelho.jpg">A Prisioneira do Espelho</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/23_O_Menino_E_O_Golfinho.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/23_O_Menino_E_O_Golfinho.jpg">O Menino e o Golfinho</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/24_A_Fuga_De_Gyodai.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/24_A_Fuga_De_Gyodai.jpg">A Fuga de Gyodai</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/25_Cancao_Fatal.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/25_Cancao_Fatal.jpg">Canção Fatal</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/26_Toque_Da_Primavera.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/26_Toque_Da_Primavera.jpg">Toque da Primavera</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/27_O_Sonho_Da_Familia_Gata.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/27_O_Sonho_Da_Familia_Gata.jpg">O Sonho da Família Gata</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/28_A_Maldicao_Sangrenta.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/28_A_Maldicao_Sangrenta.jpg">A Maldição Sangrenta</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/29_A_Lenda_Da_Borboleta_Dourada.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/29_A_Lenda_Da_Borboleta_Dourada.jpg">A Lenda da Borboleta Dourada</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/30_Avante_Pegasus.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/30_Avante_Pegasus.jpg">Avante, Pégasus!</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/31_O_Segredo_De_Bazoo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/31_O_Segredo_De_Bazoo.jpg">O Segredo de Bazoo</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/32_Reencontro_Perigoso.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/32_Reencontro_Perigoso.jpg">Reencontro Perigoso</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/33_O_Fim_De_Giluke.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/33_O_Fim_De_Giluke.jpg">O Fim de Giluke</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/34_Invencivel_Ahames.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/34_Invencivel_Ahames.jpg">Invencível Ahames</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/35_S.O.S._Planeta_Terra.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/35_S.O.S._Planeta_Terra.jpg">S.O.S. Planeta Terra!</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/36_A_Super_Potencia.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/36_A_Super_Potencia.jpg">A Super Potência</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/37_O_Desaparecimento_De_Dragon.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/37_O_Desaparecimento_De_Dragon.jpg">O Desaparecimento de Dragon</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/38_O_Espectro_Do_Baseball.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/38_O_Espectro_Do_Baseball.jpg">O Espectro do Baseball</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/39_O_Jogo_Do_Medo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/39_O_Jogo_Do_Medo.jpg">O Jogo do Medo</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/40_O_Estranho_Doce.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/40_O_Estranho_Doce.jpg">O Estranho Doce</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/41_O_Principe_Das_Estrelas.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/41_O_Principe_Das_Estrelas.jpg">O Príncipe das Estrelas</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/42_A_Garota_De_Uniforme_Escolar.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/42_A_Garota_De_Uniforme_Escolar.jpg">A Garota de Uniforme Escolar</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/43_O_Super_Giluke.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/43_O_Super_Giluke.jpg">O Super Giluke</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/44_Mai_Em_Acao.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/44_Mai_Em_Acao.jpg">Mai em Ação</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/45_Aira_A_Menina_Do_Arco-iris.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/45_Aira_A_Menina_Do_Arco-iris.jpg">Aira, a Menina do Arco-Íris</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/46_A_Transformacao_De_Shima.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/46_A_Transformacao_De_Shima.jpg">A Transformação de Shima</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/47_O_Sofrimento_Da_Familia_Gata.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/47_O_Sofrimento_Da_Familia_Gata.jpg">O Sofrimento da Família Gata</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/48_A_Paixao_De_Buba.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/48_A_Paixao_De_Buba.jpg">A Paixão de Buba</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/49_A_Aflicao_De_Shima.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/49_A_Aflicao_De_Shima.jpg">A Aflição de Shima</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/50_O_Abalo_De_Gozma.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/50_O_Abalo_De_Gozma.jpg">O Abalo de Gozma</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/51_A_Mensagem_De_Nana.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/51_A_Mensagem_De_Nana.jpg">A Mensagem de Nana</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/52_A_Morte_De_Buba.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/52_A_Morte_De_Buba.jpg">A Morte de Buba</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/53_A_Vinganca_De_Ahames.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/53_A_Vinganca_De_Ahames.jpg">A Vingança de Ahames</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/54_A_Ultima_Batalha.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/54_A_Ultima_Batalha.jpg">A Última Batalha</a></li>
-<li><a href="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/55_Adeus_Herois_Do_Universo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/changeman/Changeman/main/55_Adeus_Herois_Do_Universo.jpg">Adeus, Heróis do Universo!</a></li>
-</ul>
-        </div>
-      </td>
-    </tr>
-  </table>
-<br>
-<table>
-  <tr>
-    <td>
-      <a href="https://cirosblack.github.io/jaspion">
-        <img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Jaspion%20poster.png" alt="Jaspion">
-      </a>
-    </td>
-    <td>
-      <a href="https://cirosblack.github.io/changeman">
-        <img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/ChangemanPoster.png" alt="Yu Yu Changeman">
-      </a>
-    </td>
-    <td>
-      <a href="https://cirosblack.github.io/flashman">
-        <img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/FlashmanPoster.png" alt="Flashman">
-      </a>
-    </td>
-    <td>
-      <a href="https://cirosblack.github.io/YuYuHakusho">
-        <img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/YuYuHakusho%20poster.png" alt="Yu Yu Hakusho">
-      </a>
-    </td>
-<td>
-      <a href="https://cirosblack.github.io/Bleach">
-        <img src="https://raw.githubusercontent.com/CirosBlack/Bleach/main/Poster.Bleach.png" alt="Bleach">
-      </a>
-    </td>
-  </tr>
-</table>
-
-<script>
-        const botaoMostrar = document.getElementById('mostrar-controle');
-        const controleVolume = document.getElementById('volume-range');
-
-        botaoMostrar.addEventListener('click', () => {
-            if (controleVolume.style.opacity === '0') {
-                controleVolume.style.opacity = '1';
-            } else {
-                controleVolume.style.opacity = '0';
-            }
-        });
-    </script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var playlist = document.getElementById('playlist');
-    var previousBtn = document.getElementById('previousBtn');
-    var nextBtn = document.getElementById('nextBtn');
-
-    var currentIndex = 0;
-    var videos = playlist.getElementsByTagName('a');
-
-    function playVideo(index) {
-      if (index >= 0 && index < videos.length) {
-        var videoPlayer = document.getElementById('video-player');
-        var source = videos[index].getAttribute('href');
-        videoPlayer.src = source;
-        videoPlayer.load();
-        videoPlayer.play();
-
-        const tabelaSecundariaCelula1 = document.querySelector('#primeira-celula');
-        tabelaSecundariaCelula1.textContent = `Você está assistindo: ${videos[index].textContent.trim()}`;
-
-        // Remove a classe 'selected' de todos os vídeos da playlist
-        for (var i = 0; i < videos.length; i++) {
-          videos[i].classList.remove('selected');
-        }
-
-        // Adiciona a classe 'selected' ao vídeo atual na playlist
-        videos[index].classList.add('selected');
-
-        currentIndex = index; // Atualiza o índice atual para corresponder ao vídeo reproduzido
-      }
-    }
-
-    previousBtn.addEventListener('click', function() {
-      currentIndex--;
-      if (currentIndex < 0) {
-        currentIndex = videos.length - 1; // Volta para o último vídeo da playlist se estiver no primeiro vídeo
-      }
-      playVideo(currentIndex);
-    });
-
-    nextBtn.addEventListener('click', function() {
-      currentIndex++;
-      if (currentIndex >= videos.length) {
-        currentIndex = 0; // Volta para o primeiro vídeo da playlist se estiver no último vídeo
-      }
-      playVideo(currentIndex);
-    });
-
-    var playlistItems = playlist.querySelectorAll('a');
-    playlistItems.forEach((playlistItem, index) => {
-      playlistItem.addEventListener('click', () => {
-        playVideo(index);
-        currentIndex = index;
-
-        // Remove a classe 'selected' de todos os vídeos da playlist
-        for (var i = 0; i < videos.length; i++) {
-          videos[i].classList.remove('selected');
-        }
-
-        // Adiciona a classe 'selected' ao vídeo atual na playlist
-        videos[index].classList.add('selected');
-      });
-    });
-
-    var videoPlayer = document.getElementById('video-player');
-
-    videoPlayer.addEventListener('ended', function() {
-      currentIndex++;
-      if (currentIndex >= videos.length) {
-        currentIndex = 0; // Volta para o primeiro vídeo da playlist se estiver no último vídeo
-      }
-      playVideo(currentIndex);
-    });
-  });
-</script>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const playButton = document.getElementById("play-button");
-    const telaCheiaButton = document.getElementById("tela-cheia-button");
-    const volumeRange = document.getElementById("volume-range");
-    const videoPlayer = document.getElementById("video-player");
-
-    playButton.addEventListener("click", function() {
-      if (videoPlayer.paused) {
-        videoPlayer.play();
-        playButton.innerHTML = '<img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Pause.png" alt="Ícone Pausar" style="width: 50px; height: 50px;">';
-                } else {
-        videoPlayer.pause();
-                    playButton.innerHTML = '<img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Play.png" alt="Ícone Play" style="width: 50px; height: 50px;">';
-                }
-		   });
-    
-
-    telaCheiaButton.addEventListener("click", function() {
-      if (videoPlayer.requestFullscreen) {
-        videoPlayer.requestFullscreen();
-      } else if (videoPlayer.mozRequestFullScreen) { // Firefox
-        videoPlayer.mozRequestFullScreen();
-      } else if (videoPlayer.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        videoPlayer.webkitRequestFullscreen();
-      } else if (videoPlayer.msRequestFullscreen) { // IE/Edge
-        videoPlayer.msRequestFullscreen();
-      }
-    });
-
-    volumeRange.addEventListener("input", function() {
-      videoPlayer.volume = volumeRange.value;
-    });
-  });
-
-  function initializePlaylist() {
-    const playlistItems = document.querySelectorAll('.playlist a');
-    const videoPlayer = document.getElementById('video-player');
-    let currentIndex = 0;
-
-    function playVideo(index) {
-      const source = playlistItems[index].getAttribute('href');
-      videoPlayer.src = source;
-      playlistItems.forEach(playlistItem => {
-        playlistItem.classList.remove('selected');
-      });
-      playlistItems[index].classList.add('selected');
-      const tabelaSecundariaCelula1 = document.querySelector('#primeira-celula');
-      tabelaSecundariaCelula1.textContent = `Você está assistindo: ${playlistItems[index].textContent.trim()}`;
-    }
-
-    playlistItems.forEach((playlistItem, index) => {
-      playlistItem.addEventListener('click', () => {
-        playVideo(index);
-      });
-    });
-
-    playVideo(currentIndex);
-  }
-
-  initializePlaylist();
-
-  document.addEventListener('DOMContentLoaded', function () {
-    var playlist = document.getElementById('playlist');
-    var videoPlayer = document.getElementById('video-player');
-    var videoLinks = playlist.getElementsByTagName('a');
-
-    for (var i = 0; i < videoLinks.length; i++) {
-      videoLinks[i].addEventListener('click', function (event) {
-        event.preventDefault();
-        var videoSrc = this.getAttribute('href');
-        videoPlayer.src = videoSrc;
-
-        for (var j = 0; j < videoLinks.length; j++) {
-          videoLinks[j].classList.remove('selected');
-        }
-        this.classList.add('selected');
-      });
-    }
-
-    videoLinks[0].click();
-
-    function atualizarTamanhoPlaylist() {
-      var playlist = document.getElementById('playlist');
-      var tabelaSecundaria = document.getElementById('tabela-secundaria');
-      playlist.style.height = tabelaSecundaria.offsetHeight + 'px';
-    }
-
-    function atualizarPagina() {
-      atualizarTamanhoPlaylist();
-      // Outras atualizações necessárias quando a página é redimensionada
-    }
-
-    atualizarPagina();
-    window.addEventListener('resize', atualizarPagina);
-  });
-
-  var video = document.getElementById("video-player");
-  var progressBar = document.getElementById("progress-bar");
-
-  video.addEventListener("timeupdate", function() {
-    var progress = (video.currentTime / video.duration) * 100;
-    progressBar.value = progress;
-  });
-
-  var progressBar = document.getElementById('progress-bar');
-  var progressContainer = document.getElementById('progress-container');
-
-  progressBar.addEventListener('input', function() {
-    var videoPlayer = document.getElementById('video-player');
-    var time = videoPlayer.duration * (progressBar.value / 100);
-    videoPlayer.currentTime = time;
-  });
-
-  progressContainer.addEventListener('mousedown', function(e) {
-    var position = (e.pageX - this.offsetLeft) / this.offsetWidth;
-    progressBar.value = position * 100;
-    var videoPlayer = document.getElementById('video-player');
-    var time = videoPlayer.duration * (progressBar.value / 100);
-    videoPlayer.currentTime = time;
-  });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    var playlistItems = document.querySelectorAll(".playlist a");
-    var videoPlayer = document.getElementById("video-player");
-
-    playlistItems.forEach(function(item) {
-      item.addEventListener("click", function(e) {
-        e.preventDefault();
-        var videoUrl = this.getAttribute("href");
-        var videoThumbnail = this.querySelector(".thumbnail").getAttribute("src");
-        videoPlayer.src = videoUrl;
-        videoPlayer.poster = videoThumbnail;
-        playlistItems.forEach(function(item) {
-          item.classList.remove("selected");
-        });
-        this.classList.add("selected");
-      });
-    });
-  });
-</script>
-
-<script>
-  // Função para atualizar o tempo do vídeo em forma decrescente
-  function updateTime() {
-    var videoPlayer = document.getElementById("video-player");
-    var timeElement = document.getElementById("time");
-
-    var duration = videoPlayer.duration;
-    var currentTime = videoPlayer.currentTime;
-    var remainingTime = duration - currentTime;
-
-    // Formatação do tempo em minutos e segundos
-    var minutes = Math.floor(remainingTime / 60);
-    var seconds = Math.floor(remainingTime % 60);
-
-    // Adiciona um zero à esquerda se os segundos forem menores que 10
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-
-    // Atualiza o elemento de exibição do tempo
-    timeElement.innerHTML = minutes + ":" + seconds;
-
-    // Chama a função novamente após 1 segundo
-    setTimeout(updateTime, 1000);
-  }
-
-  // Chama a função updateTime quando o vídeo é carregado
-  var videoPlayer = document.getElementById("video-player");
-  videoPlayer.addEventListener("loadedmetadata", updateTime);
-</script>
-
-<script>
-        // Obtenha o elemento de vídeo e o botão
-        var meuVideo = document.getElementById("video-player");
-        var botaoAvanca10s = document.getElementById("avanca10s");
-
-        // Adicione um evento de clique ao botão
-        botaoAvanca10s.addEventListener("click", function() {
-            // Avance o vídeo em 10 segundos
-            meuVideo.currentTime += 10;
-        });
-    </script>
-    
-    <script>
-        // Obtenha o elemento de vídeo e o botão
-        var meuVideo = document.getElementById("video-player");
-        var botaoRetrocede10s = document.getElementById("retrocede10s");
-
-        // Adicione um evento de clique ao botão
-        botaoRetrocede10s.addEventListener("click", function() {
-            // Retroceda o vídeo em 10 segundos
-            meuVideo.currentTime -= 10;
-        });
-    </script>
-
-
-</body>
-</html>
+<!DOCTYPE html><html lang="pt"><head>  <meta charset="UTF-8">  <meta http-equiv="X-UA-Compatible" content="IE=Edge">  <meta name="viewport" content="width=device-width, initial-scale=1">  <title>Changeman</title>    <style>/* Estilo base comum a ambos os modos de orientação */@media (orientation: portrait) {  * {    margin: 0;    padding: 0;    box-sizing: border-box;    background-color: black;    font-family: "Arial Black", Arial, sans-serif;    font-weight: bold;    text-transform: uppercase;  }  .container {    display: flex;    flex-direction: row;    height: 100vh;    width: 100vw;  }  .video {    flex: 0 0 70vw;    display: flex;    flex-direction: column;  }  .video-player,  .progress-bar {    width: 75vw;    background: black;  }  .progress-bar {    height: 1vw;  }  .playlist {    flex: 1 1 auto;    background: black;    height: 61.25vw;    overflow-y: auto;  }  .playlist ul {    list-style-type: none;    padding-left: 0;    margin-top: 0;  }  .playlist a {    font-weight: bold;    font-size: 22px;    display: flex;    align-items: center;    margin-bottom: 5px;    background-color: #1C1C1C;    padding: 5px;    cursor: pointer;    text-decoration: none;    border-radius: 10px;    border: 1px solid #fff;    color: #ccc;    width: 100%;  }  .playlist a:hover {    background-color: #666;  }  .playlist a.selected {    background-color: #800000;    color: #fff;    border-color: #fff;  }  .playlist .thumbnail {    width: 130px;    height: 100px;    margin-right: 10px;    border-radius: 5%;    object-fit: cover;  }  .container {    flex-direction: column;  }  .playlist {    width: 100vw;  }  video {    width: 100%;    height: auto;  }}@media (orientation: landscape) {  /* Estilo CSS para o modo paisagem */  * {    margin: 0;    padding: 0;    box-sizing: border-box;    background-color: black;    font-family: "Arial Black", Arial, sans-serif;    font-weight: bold;    text-transform: uppercase;  }  .container {    display: flex;    flex-direction: row;    height: 100vh;    width: 100vw;          }  .video {    flex: 0 0 63vw;    display: flex;    flex-direction: column;      }  .video-player,  .progress-bar {    width: 75vw;    background: black;  }  .progress-bar {    height: 1vw;  }  .playlist {    margin-left: 10px;    flex: 1 1 auto;    background: black;    height: 61.25vw;    overflow-y: auto;  }  .playlist ul {    list-style-type: none;    padding-left: 0;    margin-top: 0;  }  .playlist a {    font-weight: bold;    font-size: 22px;    display: flex;    align-items: center;    margin-bottom: 5px;    background-color: #1C1C1C;    padding: 5px;    cursor: pointer;    text-decoration: none;    border-radius: 10px;    border: 1px solid #fff;    color: #ccc;    width: 100%;  }  .playlist a:hover {    background-color: #666;  }  .playlist a.selected {    background-color: #800000;    color: #fff;    border-color: #fff;  }  .playlist .thumbnail {    width: 130px;    height: 100px;    margin-right: 10px;    border-radius: 5%;    object-fit: cover;  }  video {    width: 100%;    height: auto;  }  .playlist {    width: 30%;    height: inherit;  }}.btnc button {    border: none;    outline: none;}    #tempoAtual {     color: white;    font-weight: bold;    text-align: right;  }    .playlist a.playing {    color: yellow;}        #player::-webkit-media-controls {      display: none !important;</style>   </head><body>  <div class="container">    <div class="video">      <video id="player" autoplay poster="https://raw.githubusercontent.com/CirosBlack/changeman/main/Changeman.jpg">        <source src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/01_Os_Defensores_Do_Planeta_Terra.mp4" type="video/mp4">      </video>      <input id="range" type="range" value="0" max="1000" class="range" style="width: 100%;">      <span id="tempoAtual" style="color: white; font-weight: bold; text-align: right; font-size: 22px;"></span>      <!-- Adicionando um parágrafo para exibir o título -->      <p id="tituloVideo" style="color: white; font-weight: bold; text-align: left; font-size: 22px;"></p>      <p id="videoPausado" style="color: white; font-weight: bold; text-align: left; font-size: 22px; display: none;">Vídeo Pausado!</p>          <div class="btnc">        <button id="play-button"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Play.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>        <button id="retrocede10s"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Voltar_10_segundos.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>        <button id="previousBtn"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Voltar.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>        <button id="nextBtn"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Avancar.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>        <button id="avanca10s"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Avancar_10_segundos.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>        <button id="tela-cheia-button"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Tela.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>        <button type="button" class="OctPlay"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Ocultar_Playlist.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>        <button id="mostrar-controle"><img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Volume.png" alt="Ícone Play" style="width: 50px; height: 50px;"></button>        <input type="range" id="controle-volume" min="0" max="1" step="0.01" value="1" style="display: none;">      </div>    </div>      <div class="playlist">      <ul id="videos">      	<li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/01_Os_Defensores_Do_Planeta_Terra.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/01_Os_Defensores_Do_Planeta_Terra.jpg"> Os Defensores Do Planeta Terra</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/02_A_Ira_Do_Poderoso_Bazoo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/02_A_Ira_Do_Poderoso_Bazoo.jpg"> A Ira do Poderoso Bazoo</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/03_O_Desespero_De_Zoobie.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/03_O_Desespero_De_Zoobie.jpg"> O Desespero de Zoobie</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/04_O_Desaparecimento_De_Togo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/04_O_Desaparecimento_De_Togo.jpg"> O Desaparecimento de Togo</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/05_O_Misterio_Do_Cristal_X.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/05_O_Misterio_Do_Cristal_X.jpg"> O Mistério do Cristal X</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/06_Cuidado_Meninas_De_Virgem.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/06_Cuidado_Meninas_De_Virgem.jpg"> Cuidado, Meninas de Virgem</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/07_O_Enviado_Do_Planeta_Atlanta.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/07_O_Enviado_Do_Planeta_Atlanta.jpg"> O Enviado do Planeta Atlanta</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/08_As_Mulheres_Vampiras.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/08_As_Mulheres_Vampiras.jpg"> As Mulheres Vampiras</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/09_A_Bola_Dragao_Salva_A_Humanidade.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/09_A_Bola_Dragao_Salva_A_Humanidade.jpg"> A Bola Dragão Salva a Humanidade</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/10_O_Toque_Dos_Bonecos.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/10_O_Toque_Dos_Bonecos.jpg"> O Toque dos Bonecos</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/11_A_Visita_De_Koko_E_Kiki.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/11_A_Visita_De_Koko_E_Kiki.jpg"> A Visita de Koko e Kiki</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/12_Mermaid_Se_Torna_Mae.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/12_Mermaid_Se_Torna_Mae.jpg"> Mermaid se Torna Mãe</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/13_A_Garota_Do_Planeta_Technoliquel.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/13_A_Garota_Do_Planeta_Technoliquel.jpg"> A Garota do Planeta Technoliquel</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/14_Perdida_Na_Terra.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/14_Perdida_Na_Terra.jpg"> Perdida na Terra</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/15_A_Motoqueira_Mai.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/15_A_Motoqueira_Mai.jpg"> A Motoqueira Mai</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/16_O_Anjo_Do_Planeta_Meril.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/16_O_Anjo_Do_Planeta_Meril.jpg"> O Anjo do Planeta Meril</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/17_O_Navio_Fantasma.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/17_O_Navio_Fantasma.jpg"> O Navio Fantasma</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/18_O_Poder_De_Ahames.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/18_O_Poder_De_Ahames.jpg"> O Poder de Ahames</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/19_A_Furia_De_Sayaka.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/19_A_Furia_De_Sayaka.jpg"> A Fúria de Sayaka</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/20_A_Revanche_De_Giluke.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/20_A_Revanche_De_Giluke.jpg"> A Revanche de Giluke</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/21_O_Metaleiro_Espacial.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/21_O_Metaleiro_Espacial.jpg"> O Metaleiro Espacial</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/22_A_Prisioneira_Do_Espelho.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/22_A_Prisioneira_Do_Espelho.jpg"> A Prisioneira do Espelho</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/23_O_Menino_E_O_Golfinho.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/23_O_Menino_E_O_Golfinho.jpg"> O Menino e o Golfinho</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/24_A_Fuga_De_Gyodai.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/24_A_Fuga_De_Gyodai.jpg"> A Fuga de Gyodai</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/25_Cancao_Fatal.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/25_Cancao_Fatal.jpg"> Canção Fatal </a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/26_Toque_Da_Primavera.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/26_Toque_Da_Primavera.jpg"> Toque da Primavera</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/27_O_Sonho_Da_Familia_Gata.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/27_O_Sonho_Da_Familia_Gata.jpg"> O Sonho da Família Gata</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/28_A_Maldicao_Sangrenta.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/28_A_Maldicao_Sangrenta.jpg"> A Maldição Sangrenta</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/29_A_Lenda_Da_Borboleta_Dourada.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/29_A_Lenda_Da_Borboleta_Dourada.jpg"> A Lenda da Borboleta Dourada</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/30_Avante_Pegasus.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/30_Avante_Pegasus.jpg"> Avante, Pegasus</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/31_O_Segredo_De_Bazoo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/31_O_Segredo_De_Bazoo.jpg"> O Segredo de Bazoo</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/32_Reencontro_Perigoso.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/32_Reencontro_Perigoso.jpg"> Reencontro Perigoso</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/33_O_Fim_De_Giluke.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/33_O_Fim_De_Giluke.jpg"> O Fim de Giluke</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/34_Invencivel_Ahames.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/34_Invencivel_Ahames.jpg"> Invencível Ahames</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/35_S_O_S_Planeta_Terra.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/35_S_O_S_Planeta_Terra.jpg"> S.O.S. Planeta Terra</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/36_A_Super_Potencia.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/36_A_Super_Potencia.jpg"> A Super Potência</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/37_O_Desaparecimento_De_Dragon.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/37_O_Desaparecimento_De_Dragon.jpg"> O Desaparecimento de Dragon</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/38_O_Espectro_Do_Baseball.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/38_O_Espectro_Do_Baseball.jpg"> O Espectro do Baseball</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/39_O_Jogo_Do_Medo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/39_O_Jogo_Do_Medo.jpg"> O Jogo do Medo</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/40_O_Estranho_Doce.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/40_O_Estranho_Doce.jpg"> O Estranho Doce</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/41_O_Principe_Das_Estrelas.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/41_O_Principe_Das_Estrelas.jpg"> O Príncipe das Estrelas</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/42_A_Garota_De_Uniforme_Escolar.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/42_A_Garota_De_Uniforme_Escolar.jpg"> A Garota de Uniforme Escolar</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/43_O_Super_Giluke.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/43_O_Super_Giluke.jpg"> O Super Giluke</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/44_Mai_Em_Acao.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/44_Mai_Em_Acao.jpg"> Mai em Ação</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/45_Aira_A_Menina_Do_Arco_Iris.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/45_Aira_A_Menina_Do_Arco_Iris.jpg"> Aira, a Menina do Arco-Íris</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/46_A_Transformacao_De_Shima.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/46_A_Transformacao_De_Shima.jpg"> A Transformação de Shima</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/47_O_Sofrimento_Da_Familia_Gata.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/47_O_Sofrimento_Da_Familia_Gata.jpg"> O Sofrimento da Família Gata</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/48_A_Paixao_De_Buba.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/48_A_Paixao_De_Buba.jpg"> A Paixão de Buba</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/49_A_Aflicao_De_Shima.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/49_A_Aflicao_De_Shima.jpg"> A Aflição de Shima</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/50_O_Abalo_De_Gozma.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/50_O_Abalo_De_Gozma.jpg"> O Abalo de Gozma</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/51_A_Mensagem_De_Nana.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/51_A_Mensagem_De_Nana.jpg"> A Mensagem de Nana</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/52_A_Morte_De_Buba.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/52_A_Morte_De_Buba.jpg"> A Morte de Buba</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/53_A_Vinganca_De_Ahames.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/53_A_Vinganca_De_Ahames.jpg"> A Vingança de Ahames</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/54_A_Ultima_Batalha.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/54_A_Ultima_Batalha.jpg"> A Última Batalha</a><li><a href="#" data-src="https://huggingface.co/datasets/Ciros/Changeman/resolve/main/55_Adeus_Herois_Do_Universo.mp4"><img class="thumbnail" src="https://raw.githubusercontent.com/CirosBlack/changeman/main/55_Adeus_Herois_Do_Universo.jpg"> Adeus, Heróis do Universo</a></ul>  </div>  </div>  <script>  	var player = document.getElementById("player");var videos = document.getElementById("videos");var tempoAtual = document.getElementById("tempoAtual");var range = document.getElementById("range");var tituloVideo = document.getElementById("tituloVideo");var current = 0;function loadVideo(link) {    player.src = link.dataset.src;    player.play();    // Atualiza o título do vídeo    tituloVideo.textContent = link.textContent;}function nextVideo() {    var currentSrc = player.src;    for (var i = 0; i < videos.children.length; i++) {        var link = videos.children[i].firstChild;        if (link.dataset.src == currentSrc) {            current = i;            break;        }    }    current++;    if (current >= videos.children.length) {        current = 0;    }    var link = videos.children[current].firstChild;    loadVideo(link);}player.addEventListener("ended", nextVideo);for (var i = 0; i < videos.children.length; i++) {    var link = videos.children[i].firstChild;    link.addEventListener("click", function (event) {        event.preventDefault();        loadVideo(this);        var currentSrc = player.src;        for (var i = 0; i < videos.children.length; i++) {            var link = videos.children[i].firstChild;            if (link.dataset.src == currentSrc) {                current = i;                break;            }        }    });}function updateTempoAtual() {    var tempoRestante = player.duration - player.currentTime;    tempoAtual.textContent = formatTime(tempoRestante);}function updateRange() {    var fraction = player.currentTime / player.duration;    range.value = fraction * 1000;}function updateVideo() {    var fraction = range.value / 1000;    player.currentTime = fraction * player.duration;}function formatTime(time) {    var minutes = Math.floor(time / 60);    var seconds = Math.floor(time % 60);    return `${padZero(minutes)}:${padZero(seconds)}`;}function padZero(number) {    return number < 10 ? `0${number}` : `${number}`;}// Adiciona um evento de play para atualizar o título do vídeoplayer.addEventListener("play", function () {    tituloVideo.style.display = "block";});// Adiciona um evento de pause para ocultar o título do vídeoplayer.addEventListener("pause", function () {    tituloVideo.style.display = "none";});player.addEventListener("timeupdate", function () {    updateTempoAtual();    updateRange();    updatePlaylist();});range.addEventListener("input", updateVideo);// cor vermelha para o vídeo em reprodução player.addEventListener("timeupdate", function () {    updateTempoAtual();    updateRange();    updatePlaylist(); });function updatePlaylist() {    var currentSrc = player.src;    for (var i = 0; i < videos.children.length; i++) {        var link = videos.children[i].firstChild;        if (link.dataset.src == currentSrc) {            if (player.paused) {                link.classList.remove("playing");            } else {                link.classList.add("playing");            }        } else {            link.classList.remove("playing");        }    }}// Exibe o título do primeiro vídeo quando a página é carregadawindow.onload = function () {    tituloVideo.textContent = videos.children[0].firstChild.textContent;};// Obtenha uma referência para o elemento do player de vídeovar playerElement = document.getElementById("player");// Adicione um ouvinte de evento para o clique do mouse no elemento do playerplayerElement.addEventListener("contextmenu", function (event) {    // Impede o menu de contexto padrão (menu que aparece ao clicar com o botão direito)    event.preventDefault();});</script><script>//controle dos botõesvar playButton = document.getElementById("play-button");var retrocede10sButton = document.getElementById("retrocede10s");var previousBtn = document.getElementById("previousBtn");var nextBtn = document.getElementById("nextBtn");var avanca10sButton = document.getElementById("avanca10s");var telaCheiaButton = document.getElementById("tela-cheia-button");var octPlayButton = document.querySelector(".OctPlay");var mostrarControleButton = document.getElementById("mostrar-controle");var controleVolumeInput = document.getElementById("controle-volume");playButton.addEventListener("click", function () {    if (player.paused) {        player.play();    } else {        player.pause();    }});// Adicione um evento de play para atualizar o botão playplayer.addEventListener("play", function () {    playButton.innerHTML = '<img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Pause.png" alt="Ícone Pause" style="width: 50px; height: 50px;">';});// Adicione um evento de pause para atualizar o botão playplayer.addEventListener("pause", function () {    playButton.innerHTML = '<img src="https://raw.githubusercontent.com/CirosBlack/YuYuHakusho/main/Play.png" alt="Ícone Play" style="width: 50px; height: 50px;">';});retrocede10sButton.addEventListener("click", function () {    player.currentTime -= 10;});previousBtn.addEventListener("click", function () {    var prevIndex = current - 1;    if (prevIndex < 0) {        prevIndex = videos.children.length - 1;    }    var prevLink = videos.children[prevIndex].firstChild;    loadVideo(prevLink);});nextBtn.addEventListener("click", nextVideo);avanca10sButton.addEventListener("click", function () {    player.currentTime += 10;});telaCheiaButton.addEventListener("click", function () {    if (player.requestFullscreen) {        player.requestFullscreen();    } else if (player.mozRequestFullScreen) {        player.mozRequestFullScreen();    } else if (player.webkitRequestFullscreen) {        player.webkitRequestFullscreen();    }});octPlayButton.addEventListener("click", function () {    // Adicione a lógica para ocultar ou mostrar a playlist    // Aqui você pode ajustar a visibilidade da playlist conforme necessário    // Exemplo: Se a playlist estiver visível, oculte; se estiver oculta, mostre.    var playlist = document.getElementById("videos");    playlist.style.display = (playlist.style.display === "none" || playlist.style.display === "") ? "block" : "none";});mostrarControleButton.addEventListener("click", function () {    // Adicione a lógica para mostrar ou ocultar o controle de volume    // Aqui você pode ajustar a visibilidade do controle de volume conforme necessário    controleVolumeInput.style.display = (controleVolumeInput.style.display === "none" || controleVolumeInput.style.display === "") ? "block" : "none";});controleVolumeInput.addEventListener("input", function () {    // Atualize o volume do player conforme o valor do controle de volume    player.volume = controleVolumeInput.value;});// Adicione um evento de play para ocultar a mensagem "vídeo pausado!"player.addEventListener("play", function () {    document.getElementById("videoPausado").style.display = "none";});// Adicione um evento de pause para mostrar a mensagem "vídeo pausado!"player.addEventListener("pause", function () {    document.getElementById("videoPausado").style.display = "block";});  </script>  </body></html>
